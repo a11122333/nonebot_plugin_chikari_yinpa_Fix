@@ -375,7 +375,7 @@ class yinpa_Handles():
         rh_str_t = Utils.reduce_hp(at,res_u)
         DHandles.data_set(uid,"active_times",data[uid]["active_times"] + 1)
         DHandles.data_set(at,"passive_times",data[at]["passive_times"] + 1)
-        await matcher.finish(f"{data[uid]['name']}透了{data[at]['name']}\n" + str_t + "\n" + str_u + hp_str +  rh_str_u +  rh_str_t)
+        await matcher.finish(MessageSegment.image(Utils.text_to_image(f"{data[uid]['name']}透了{data[at]['name']}\n" + str_t + "\n" + str_u + hp_str +  rh_str_u +  rh_str_t)))
         
     async def yinpa_zha(
             matcher: Matcher,event: GroupMessageEvent,args: Message = CommandArg()
@@ -505,7 +505,7 @@ class yinpa_Handles():
         rh_str_t = Utils.reduce_hp(at,res_u)
         DHandles.data_set(uid,"active_times",data[uid]["active_times"] + 1)
         DHandles.data_set(at,"passive_times",data[at]["passive_times"] + 1)
-        await matcher.finish(f"{data[uid]['name']}榨了{data[at]['name']}\n" + str_t  + "\n" + str_u + hp_str + rh_str_u + rh_str_t)
+        await matcher.finish(MessageSegment.image(Utils.text_to_image(f"{data[uid]['name']}榨了{data[at]['name']}\n" + str_t  + "\n" + str_u + hp_str + rh_str_u + rh_str_t)))
         
     async def yinpa_chong(
             matcher: Matcher,event: GroupMessageEvent

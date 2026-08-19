@@ -124,14 +124,19 @@ class Utils:
         """
         
         fontSize = 20
+        stroke = 2  # 描边宽度，用于加粗字体
         liens = text.split('\n')
         max_len = 0
         for str in liens:
-            max_len = max(len(str),max_len)
-        image = Image.new("RGB", ((fontSize * max_len), len(liens) * (fontSize + 5)), (255, 255, 255))
+            # 中文/全角字符在等宽字体下约占 2 个字符宽度
+            length = 0
+            for c in str:
+                length += 2 if ord(c) > 255 else 1
+            max_len = max(length, max_len)
+        image = Image.new("RGB", ((fontSize * max_len) + stroke * 2, len(liens) * (fontSize + 5) + stroke * 2), (255, 255, 255))
         draw = ImageDraw.Draw(image)
         font = ImageFont.truetype(_get_plugin_config().chikari_yinpa_font, fontSize)
-        draw.text((0, 0), text, font=font, fill="#000000", stroke_width = 0)
+        draw.text((stroke, stroke), text, font=font, fill="#000000", stroke_width = stroke)
         img = image.convert("RGB")
         img_byte = BytesIO()
         img.save(img_byte,"PNG")
